@@ -14,3 +14,12 @@ dataset$Country = factor(dataset$Country, levels=c('France', 'Spain', 'Germany')
 
 # Dummy encoding for DVV
 dataset$Purchased = factor(dataset$Purchased, levels=c('Yes', 'No'), labels=c(1,0))
+
+# Split data into training set and test set
+library(caTools)
+set.seed(123)
+
+split = sample.split(dataset$Purchased, SplitRatio = 0.8)
+training_set = subset(dataset, split == TRUE)
+test_set = subset(dataset, split == FALSE)
+
