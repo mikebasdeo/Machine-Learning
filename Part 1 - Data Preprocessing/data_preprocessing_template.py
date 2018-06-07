@@ -8,55 +8,23 @@ import pandas as pd
 
 dataset = pd.read_csv("Data.csv")
 
+# Distinguish between matrix of features and dependent variable vector
+
+# Matrix of features, all rows, columns except last one.
+x = dataset.iloc[:, :-1].values
+
+# Dependent variable vector
+y = dataset.iloc[:,3].values
 
 
+# Spyder > 3.2 has a problem displaying x, so this will help with that.
+display_x = pd.DataFrame(x)
+display_y = pd.DataFrame(y)
 
+# Take care of missing data by taking the mean of the data available
+from sklearn.preprocessing import Imputer
 
+imputer = Imputer(missing_values="NaN", strategy="mean", axis=0)
+imputer = imputer.fit(x[:, 1:3])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Importing the dataset
-#dataset = pd.read_csv('Data.csv')
-#X = dataset.iloc[:, :-1].values
-#y = dataset.iloc[:, 3].values
-#
-## Splitting the dataset into the Training set and Test set
-#from sklearn.cross_validation import train_test_split
-#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
-#
-## Feature Scaling
-#"""from sklearn.preprocessing import StandardScaler
-#sc_X = StandardScaler()
-#X_train = sc_X.fit_transform(X_train)
-#X_test = sc_X.transform(X_test)
-#sc_y = StandardScaler()
-#y_train = sc_y.fit_transform(y_train)"""
+x[:,1:3] = imputer.transform(x[:,1:3])
