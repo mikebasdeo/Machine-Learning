@@ -36,7 +36,7 @@ regressor.fit(X_train, y_train)
 # Predicting the Test set results by creating a vector of predictions
 y_pred = regressor.predict(X_test)
 
-# Plot that shit!
+# Plot the training data and its corresponding linear regression line.
 plt.scatter(X_train, y_train, color = 'red')
 plt.plot(X_train, regressor.predict(X_train), color = 'blue')
 plt.title('Salary vs Experience (Training Set)')
@@ -44,6 +44,14 @@ plt.xlabel('Years of Experience')
 plt.ylabel('Salary')
 plt.show()
 
+
+# Plot the test data and its corresponding linear regression line.
+plt.scatter(X_test, y_test, color = 'red')
+plt.plot(X_train, regressor.predict(X_train), color = 'blue')
+plt.title('Salary vs Experience (Test Set)')
+plt.xlabel('Years of Experience')
+plt.ylabel('Salary')
+plt.show()
 
 
 
